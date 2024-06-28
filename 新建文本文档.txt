@@ -1,0 +1,131 @@
+//删除了时间，获取系统时间在API9中实现，开发板使用RK3568和API8的open harmony
+import { HomeDetails } from './common/homedetails';
+import router from '@ohos.router';
+import sensor from '@ohos.sensor';
+
+@Entry
+@Component
+struct Second {
+  @State message: string = 'Hi there'
+  @State private isSelect: boolean = true;
+  /*
+  //传感器获取温湿度——接口
+  @State private temperature: string = '0°'
+  @State private humidity: string = '0%'
+
+  aboutToAppear() {// 注册温度传感器
+    try {
+      sensor.on(sensor.SensorId.AMBIENT_TEMPERATURE, (data) => {
+        console.info('Temperature: ' + data.temperature);
+        this.temperature = `${data.temperature.toFixed(1)}°`
+      }, { interval: 10000000 });
+    } catch (err) {
+      console.error('Temperature sensor on fail, errCode: ' + err.code + ' ,msg: ' + err.message);
+    }
+
+    // 注册湿度传感器
+    try {
+      sensor.on(sensor.SensorId.HUMIDITY, (data) => {
+        console.info('Humidity: ' + data.humidity);
+        this.humidity = `${data.humidity.toFixed(1)}%`
+      }, { interval: 10000000 });
+    } catch (err) {
+      console.error('Humidity sensor on fail, errCode: ' + err.code + ' ,msg: ' + err.message);
+    }
+
+  }
+  */
+
+  build() {
+
+    Column() {
+      Row() {
+
+        Image($r("app.media.back"))
+          .objectFit(ImageFit.Contain)
+          .width(80)
+          .height(80)
+          .onClick(() => {
+            router.back()
+          })
+
+        Blank()
+
+        Text('Home')
+          .fontSize(45)
+          .fontWeight(FontWeight.Bold)
+
+
+        Blank()
+        Image($r("app.media.notifications_none"))
+          .objectFit(ImageFit.Contain)
+          .width(80)
+          .height(80)
+          .onClick(() => {
+            router.back()
+          })
+
+      }
+
+      .width('100%')
+
+
+
+      Row({ space: 120 }) {
+        Column() {
+          Text('19°',)
+            .fontSize(40).opacity(0.4)
+            .fontWeight(FontWeight.Bold)
+          Text('TEMPERATURE',)
+            .fontSize(40).opacity(0.4)
+        }.margin({ left: 60 })
+
+        Column() {
+          Text('92%',)
+            .fontSize(40).opacity(0.4)
+            .fontWeight(FontWeight.Bold)
+          Text('HUMIDITY',)
+            .fontSize(40).opacity(0.4)
+        }.margin({ right: 60 })
+      }.margin({ top: 20 })
+      /*
+      Row({ space: 120 }) {
+        Column() {
+          Text(this.temperature)
+            .fontSize(40).opacity(0.4)
+            .fontWeight(FontWeight.Bold)
+          Text('TEMPERATURE')
+            .fontSize(40).opacity(0.4)
+        }.margin({ left: 60 })
+
+        Column() {
+          Text(this.humidity)
+            .fontSize(40).opacity(0.4)
+            .fontWeight(FontWeight.Bold)
+          Text('HUMIDITY')
+            .fontSize(40).opacity(0.4)
+        }.margin({ right: 60 })
+      }.margin({ top: 20 })
+       */
+
+
+      Row() {
+        HomeDetails({})
+
+        HomeDetails({ image: "common/images/lightbull.png", isSelected: this.isSelect! })
+
+      }
+
+      Row() {
+
+
+        HomeDetails({ image: "common/images/opacity.png" })
+        HomeDetails({ image: "common/images/yytem0.png" })
+
+
+      }
+
+    }.width("100%")
+    .height('100%').backgroundColor("#F5F5F5")
+  }
+}
